@@ -33,4 +33,9 @@ class Order extends BaseModel
     {
         return $this->belongsTo(User::class);
     }
+
+    public function coupons()
+    {
+        return $this->belongsToMany(DiscountCoupons::class,'order_coupon');
+    }
 }
