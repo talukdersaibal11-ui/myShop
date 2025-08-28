@@ -17,12 +17,12 @@ class CategoryRepository
         $paginateSize = Helper::checkPaginateSize($request);
         $searchKey    = $request->input('search_key', null);
 
-        $users = Category::
+        $categories = Category::
         when($searchKey, fn($query) => $query->where("name", "like", "%$searchKey%")->orWhere("slug", "like", "%$searchKey%"))
         ->orderBy('id', 'desc')
         ->paginate($paginateSize);
 
-        return $users;
+        return $categories;
     }
 
     public function store($request)
