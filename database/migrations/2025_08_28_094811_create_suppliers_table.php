@@ -11,11 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('units', function (Blueprint $table) {
+        Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
             $table->string('name', 250);
-            $table->string('slug', 250);
-            $table->string('symbol')->nullable();
+            $table->string('party_code', 250)->unique();
+            $table->string('company_name')->nullable();
+            $table->string('email', 250)->nullable()->unique();
+            $table->string('phone', 15)->nullable();
+            $table->string('address', 500)->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('country')->nullable();
+            $table->string('zip_code')->nullable();
+            $table->string('tin_number')->nullable();
+            $table->string('vat_number')->nullable();
+            $table->text('notes')->nullable();
+            $table->enum('status', ['active', 'inactive'])->default('active');
 
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
@@ -36,6 +47,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('units');
+        Schema::dropIfExists('suppliers');
     }
 };

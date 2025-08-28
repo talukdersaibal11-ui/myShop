@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             BrandSeeder::class,
             LaratrustSeeder::class,
             UnitSeeder::class,
+            SupplierSeeder::class,
        ]);
     }
 }

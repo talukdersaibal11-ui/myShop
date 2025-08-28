@@ -13,14 +13,14 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        $faker = Faker::create();
+        $faker = Faker::create('bn_BD');
         $users = [];
 
         for ($i = 1; $i <= 100; $i++) {
             $users[] = [
                 'name'               => $faker->name,
                 'email'              => $faker->unique()->safeEmail,
-                'phone_number'       => '0171' . str_pad($i, 7, '0', STR_PAD_LEFT),
+                'phone_number'       => '017' . str_pad(mt_rand(10000000, 99999999), 8, '0', STR_PAD_LEFT),
                 'address'            => $faker->address,
                 'verification_token' => Str::random(10),
                 'is_verified'        => $faker->boolean(70),
