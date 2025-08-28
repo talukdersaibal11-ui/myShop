@@ -27,7 +27,7 @@ class UnitSeeder extends Seeder
         foreach ($units as $unit) {
             DB::table('units')->insert([
                 'name'       => $unit['name'],
-                'slug'       => Str::slug($unit),
+                'slug'       => Str::slug($unit['name']),
                 'symbol'     => $unit['symbol'],
                 'created_at' => now(),
                 'updated_at' => now(),

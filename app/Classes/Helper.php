@@ -24,4 +24,12 @@ class Helper
 
         return response()->json($response, $code);
     }
+
+    public static function checkPaginateSize($request)
+    {
+        $paginateSize = $request->paginate_size ?? 100;
+        $paginateSize = $paginateSize > 1000 ? 10 : $paginateSize;
+
+        return $paginateSize;
+    }
 }

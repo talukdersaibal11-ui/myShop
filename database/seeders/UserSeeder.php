@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
                 'is_verified'        => $faker->boolean(70),
                 'email_verified_at'  => $faker->boolean(70) ? Carbon::now() : null,
                 'password'           => Hash::make('password123'),
-                'status'             => $faker->randomElement(['active', 'inactive']),
+                'status'             => 'active',
                 'created_at'         => Carbon::now(),
                 'updated_at'         => Carbon::now(),
             ];
