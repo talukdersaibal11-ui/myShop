@@ -25,6 +25,13 @@ class CategoryRepository
         return $categories;
     }
 
+    public function list()
+    {
+        $categories = $this->model->select('id', 'name', 'slug')->get();
+
+        return $categories;
+    }
+
     public function store($request)
     {
         $category = new $this->model();

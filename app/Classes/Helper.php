@@ -2,6 +2,8 @@
 
 namespace App\Classes;
 
+use Illuminate\Support\Str;
+
 class Helper
 {
     public static function sendResponse($result, $message, $code = 200)
@@ -31,5 +33,14 @@ class Helper
         $paginateSize = $paginateSize > 1000 ? 10 : $paginateSize;
 
         return $paginateSize;
+    }
+
+    public static function getUpperCase($text = null)
+    {
+        if($text !=  null){
+            return Str::title($text);
+        }
+
+        return 'N/A';
     }
 }

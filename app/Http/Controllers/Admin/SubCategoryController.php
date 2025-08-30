@@ -34,6 +34,19 @@ class SubCategoryController extends BaseController
         }
     }
 
+    public function list( )
+    {
+        try {
+            $subCategories = $this->repository->list();
+
+            $subCategories = new SubCategoryCollection($subCategories);
+
+            return $this->sendResponse($subCategories, 'Sub Category List');
+        } catch (Exception $exception) {
+            Log::error($exception->getMessage());
+        }
+    }
+
     public function store(StoreSubCategoryRequest $request)
     {
         try {

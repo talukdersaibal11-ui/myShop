@@ -24,6 +24,13 @@ class SubCategoryRepository
         return $subCategories;
     }
 
+    public function list()
+    {
+        $subCategories = $this->model->select('id', 'name', 'slug')->get();
+
+        return $subCategories;
+    }
+
     public function store($request)
     {
         $subCategory = new $this->model();

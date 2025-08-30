@@ -29,7 +29,20 @@ class CategoryController extends BaseController
 
             $categories = new CategoryCollection($categories);
 
-            return $this->sendResponse($categories, "User List");
+            return $this->sendResponse($categories, "Category List");
+        } catch (Exception $exception) {
+            Log::info($exception->getMessage());
+        }
+    }
+
+    public function list()
+    {
+        try {
+            $categories = $this->repository->list();
+
+            $categories = new CategoryCollection($categories);
+
+            return $this->sendResponse($categories, "Category List");
         } catch (Exception $exception) {
             Log::info($exception->getMessage());
         }
