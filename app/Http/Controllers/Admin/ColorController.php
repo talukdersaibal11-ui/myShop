@@ -6,6 +6,7 @@ use App\Classes\BaseController;
 use App\Exceptions\CustomException;
 use App\Http\Requests\Admin\StoreColorRequest;
 use App\Http\Requests\Admin\UpdateColorRequest;
+use App\Http\Resources\Admin\ColorCollection;
 use App\Http\Resources\Admin\ColorResource;
 use App\Repositories\ColorRepository;
 use Exception;
@@ -19,6 +20,32 @@ class ColorController extends BaseController
     public function __construct(ColorRepository $repository)
     {
         $this->repository = $repository;
+    }
+
+    public function index(Request $request)
+    {
+        try {
+            $colors = $this->repository->index($request);
+
+            $colors = new ColorCollection($colors);
+
+            return $this->sendResponse($colors, 'Color List');
+        } catch (Exception $exception) {
+            Log::info($exception->getMessage());
+        }
+    }
+
+    public function list()
+    {
+        try {
+            $colors = $this->repository->list();
+
+            $colors = new ColorCollection($colors);
+
+            return $this->sendResponse($colors, 'Color List');
+        } catch (Exception $exception) {
+            Log::info($exception->getMessage());
+        }
     }
 
     public function store(StoreColorRequest $request)
