@@ -35,7 +35,7 @@ class GodownController extends BaseController
     {
         $godowns = $this->repository->list();
 
-        $godowns = new GodownResource($godowns);
+        $godowns = new GodownCollection($godowns);
 
         return $this->sendResponse($godowns, 'Godown List');
     }

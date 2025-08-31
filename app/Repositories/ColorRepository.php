@@ -4,11 +4,11 @@ namespace App\Repositories;
 
 use App\Classes\Helper;
 use App\Exceptions\CustomException;
-use App\Models\Size;
+use App\Models\Color;
 
 class ColorRepository
 {
-    public function __construct(protected Size $model){}
+    public function __construct(protected Color $model){}
 
     public function index($request)
     {

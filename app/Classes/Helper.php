@@ -58,7 +58,7 @@ class Helper
             $number = 1;
         }
 
-        $code = $prefix . '-' . str_pad($number, $length, '0', STR_PAD_LEFT);
+        $code = $prefix . str_pad($number, $length, '0', STR_PAD_LEFT);
 
         while ($model->newQuery()->where($column, $code)->exists()) {
             $number++;

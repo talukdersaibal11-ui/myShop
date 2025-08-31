@@ -19,7 +19,7 @@ class SizeRepository
 
     public function list()
     {
-        $sizes = $this->model->select('id', 'name', 'slug');
+        $sizes = $this->model::select('id', 'name', 'code')->get();
 
         return $sizes;
     }

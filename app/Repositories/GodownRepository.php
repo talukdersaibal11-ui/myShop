@@ -19,7 +19,7 @@ class GodownRepository
 
     public function list()
     {
-        $godowns = $this->model::select("id", "name", "hex_code")->get();
+        $godowns = $this->model::select("id", "name", "code")->get();
 
         return $godowns;
     }

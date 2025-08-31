@@ -18,7 +18,7 @@ class BrandRepository
 
     public function list()
     {
-        $brands = $this->model::select('id', 'name', 'slug');
+        $brands = $this->model::select('id', 'name', 'slug')->get();
 
         return $brands;
     }

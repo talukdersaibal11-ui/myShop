@@ -26,9 +26,6 @@ return new class extends Migration
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
-
-            // Define Foreign Key
-            $table->foreign('godown_code')->references('code')->on('godowns');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

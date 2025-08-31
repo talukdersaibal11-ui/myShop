@@ -35,7 +35,7 @@ class SizeController extends BaseController
     {
         $sizes = $this->repository->list();
 
-        $sizes = new SizeResource($sizes);
+        $sizes = new SizeCollection($sizes);
 
         return $this->sendResponse($sizes, 'Size List');
     }
