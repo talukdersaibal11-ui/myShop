@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\CustomerTypeController;
 use App\Http\Controllers\Admin\GodownController;
+use App\Http\Controllers\Admin\SalesRepresentativeController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\UnitController;
 
@@ -89,6 +90,16 @@ Route::middleware(['auth:sanctum'])->group(function(){
 
     Route::prefix('customer/type')->group(function () {
         Route::controller(CustomerTypeController::class)->group(function () {
+            Route::get("/",           'index');
+            Route::get("/list",       'list');
+            Route::post("/",          'store');
+            Route::put("/{id}",       'update');
+            Route::delete("/{id}",    'destroy');
+        });
+    });
+
+    Route::prefix('sr')->group(function () {
+        Route::controller(SalesRepresentativeController::class)->group(function () {
             Route::get("/",           'index');
             Route::get("/list",       'list');
             Route::post("/",          'store');

@@ -3,6 +3,7 @@
 namespace App\Classes;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\Model;
 
 class Helper
@@ -35,6 +36,29 @@ class Helper
 
         return $paginateSize;
     }
+
+    public static function uploadFile($file, $uploadPath, $oldFilePath = null, $key = '')
+    {
+        if ($file) {
+            // Delete old file
+            if ($oldFilePath) {
+                if (File::exists($oldFilePath)) {
+                    File::delete($oldFilePath);
+                }
+            }
+
+            $uploadPath = "uploads/" . $uploadPath;
+            $extension  = strtolower($file->getClientOriginalExtension());
+            $fileName   = $key . "_" . time() . '.' . $extension;
+
+            $file->move(public_path($uploadPath), $fileName);
+
+            return $uploadPath . '/' . $fileName;
+        }
+
+        return null;
+    }
+
 
     public static function getUpperCase($text = null)
     {
