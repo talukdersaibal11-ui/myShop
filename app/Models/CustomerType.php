@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Classes\BaseModel;
 
-class CustomerType extends Model
+class CustomerType extends BaseModel
 {
     //
 }

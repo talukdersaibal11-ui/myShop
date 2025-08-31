@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\Admin\CustomerTypeController;
 use App\Http\Controllers\Admin\GodownController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\UnitController;
@@ -78,6 +79,16 @@ Route::middleware(['auth:sanctum'])->group(function(){
 
     Route::prefix('unit')->group(function () {
         Route::controller(UnitController::class)->group(function () {
+            Route::get("/",           'index');
+            Route::get("/list",       'list');
+            Route::post("/",          'store');
+            Route::put("/{id}",       'update');
+            Route::delete("/{id}",    'destroy');
+        });
+    });
+
+    Route::prefix('customer/type')->group(function () {
+        Route::controller(CustomerTypeController::class)->group(function () {
             Route::get("/",           'index');
             Route::get("/list",       'list');
             Route::post("/",          'store');
