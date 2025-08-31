@@ -3,6 +3,7 @@
 namespace App\Classes;
 
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Model;
 
 class Helper
 {
@@ -42,5 +43,28 @@ class Helper
         }
 
         return 'N/A';
+    }
+
+    public static function generate(Model $model, string $column = 'code', string $prefix = 'GD', int $length = 4): string
+    {
+        $latest = $model->newQuery()
+            ->orderByDesc($column)
+            ->value($column);
+
+        if ($latest) {
+            $number = (int) str_replace($prefix . '-', '', $latest);
+            $number++;
+        } else {
+            $number = 1;
+        }
+
+        $code = $prefix . '-' . str_pad($number, $length, '0', STR_PAD_LEFT);
+
+        while ($model->newQuery()->where($column, $code)->exists()) {
+            $number++;
+            $code = $prefix . str_pad($number, $length, '0', STR_PAD_LEFT);
+        }
+
+        return $code;
     }
 }

@@ -13,20 +13,24 @@ class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        $faker = Faker::create('bn_BD');
+        $faker = Faker::create();
+        $godownCodes = DB::table('godowns')->pluck('code')->toArray();
+
         $users = [];
 
-        for ($i = 1; $i <= 100; $i++) {
+        for ($i = 1; $i <= 20; $i++) {
             $users[] = [
+                'godown_code'        => $faker->randomElement($godownCodes),
                 'name'               => $faker->name,
                 'email'              => $faker->unique()->safeEmail,
-                'phone_number'       => '017' . str_pad(mt_rand(10000000, 99999999), 8, '0', STR_PAD_LEFT),
+                'phone_number'       => $faker->unique()->numerify('017########'),
                 'address'            => $faker->address,
                 'verification_token' => Str::random(10),
-                'is_verified'        => $faker->boolean(70),
-                'email_verified_at'  => $faker->boolean(70) ? Carbon::now() : null,
-                'password'           => Hash::make('password123'),
-                'status'             => 'active',
+                'is_verified'        => $faker->boolean,
+                'email_verified_at'  => $faker->boolean ? Carbon::now() : null,
+                'password'           => Hash::make('password'),
+                'status'             => $faker->randomElement(['active', 'inactive']),
+                'remember_token'     => Str::random(10),
                 'created_at'         => Carbon::now(),
                 'updated_at'         => Carbon::now(),
             ];

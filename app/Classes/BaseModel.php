@@ -42,7 +42,7 @@ class BaseModel extends Model
     {
         return Attribute::make(
             get: fn ($value) => $value,
-            set: fn (string $value) => Str::slug($value),
+            set: fn (string $value) => Str::slug($value, '-'),
         );
     }
 

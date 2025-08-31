@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('godown_code', 250);
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone_number', 15)->unique();
@@ -25,6 +26,9 @@ return new class extends Migration
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
+
+            // Define Foreign Key
+            $table->foreign('godown_code')->references('code')->on('godowns');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

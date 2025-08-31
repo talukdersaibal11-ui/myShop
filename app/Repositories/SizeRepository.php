@@ -32,6 +32,8 @@ class SizeRepository
         $size->code = strtoupper($request->code);
 
         $size->save();
+
+        return $size;
     }
 
     public function update($request, $id)
@@ -46,6 +48,8 @@ class SizeRepository
         $size->code = strtoupper($request->code);
 
         $size->save();
+
+        return $size;
     }
 
     public function delete($id)
