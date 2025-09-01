@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
            GodownSeeder::class,
             UserSeeder::class,
             CustomerTypeSeeder::class,
+            DepartmentSeeder::class,
             ColorSeeder::class,
             SizeSeeder::class,
             CategorySeeder::class,
