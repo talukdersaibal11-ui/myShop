@@ -66,7 +66,9 @@ class BrandController extends BaseController
         try {
             $brand = $this->repository->update($request, $id);
 
+            $brand = new BrandResource($brand);
 
+            return $this->sendResponse($brand, 'Brand Update Successfully');
         } catch(CustomException $exception){
             return $this->sendError($exception);
         }
@@ -78,7 +80,8 @@ class BrandController extends BaseController
     public function destroy($id)
     {
         try {
-            $brand = $this->repository->delete($id);
+            $this->repository->delete($id);
+
             return $this->sendResponse(null, 'Brand Deleted successfully.');
         }catch(CustomException $exception){
             return $this->sendError($exception);

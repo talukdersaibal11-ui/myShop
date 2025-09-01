@@ -53,6 +53,21 @@ class DepartmentController extends BaseController
         }
     }
 
+    public function show($id)
+    {
+        try {
+            $department = $this->repository->show($id);
+
+            $department = new DepartmentResource($department);
+
+            return $this->sendResponse($department, "Department Single View");
+        } catch (CustomException $exception) {
+            return $this->sendError($exception->getMessage());
+        } catch (Exception $exception) {
+            Log::info($exception->getMessage());
+        }
+    }
+
     public function update(UpdateDepartmentRequest $request, $id)
     {
         try {
@@ -62,7 +77,7 @@ class DepartmentController extends BaseController
 
             return $this->sendResponse($department, 'Department Update Successfully');
         } catch (CustomException $exception) {
-            return $this->sendError('Department is not found.');
+            return $this->sendError($exception->getMessage());
         } catch (Exception $exception) {
             Log::info($exception->getMessage());
         }

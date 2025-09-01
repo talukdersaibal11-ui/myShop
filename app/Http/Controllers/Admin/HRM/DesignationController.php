@@ -53,6 +53,21 @@ class DesignationController extends BaseController
         }
     }
 
+    public function show($id)
+    {
+        try {
+            $designation = $this->repository->show($id);
+
+            $designation = new DesignationResource($designation);
+
+            return $this->sendResponse($designation, 'Designation Single View');
+        } catch (CustomException $exception) {
+            return $this->sendError($exception->getMessage());
+        } catch (Exception $exception) {
+            Log::info($exception->getMessage());
+        }
+    }
+
     public function update(UpdateDesignationRequest $request, $id)
     {
         try {
@@ -62,7 +77,7 @@ class DesignationController extends BaseController
 
             return $this->sendResponse($designation, 'Designation Update Successfully');
         } catch (CustomException $exception) {
-            return $this->sendError('Designation is not found.');
+            return $this->sendError($exception->getMessage());
         } catch (Exception $exception) {
             Log::info($exception->getMessage());
         }
@@ -75,7 +90,7 @@ class DesignationController extends BaseController
 
             return $this->sendResponse(null, "Designation delete successfully.");
         } catch (CustomException $exception) {
-            return $this->sendError('Designation is not found.');
+            return $this->sendError($exception->getMessage());
         } catch (Exception $exception) {
             Log::info($exception->getMessage());
         }

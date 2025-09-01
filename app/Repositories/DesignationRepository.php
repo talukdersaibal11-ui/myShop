@@ -36,6 +36,17 @@ class DesignationRepository
         return $designation;
     }
 
+    public function show($id)
+    {
+        $designation = $this->model::with("createdBy:id,name", "updatedBy:id,name")->find($id);
+
+        if(!$designation){
+            throw new CustomException("Designation not found.");
+        }
+
+        return $designation;
+    }
+
     public function update($request, $id)
     {
         $designation = $this->model::find($id);

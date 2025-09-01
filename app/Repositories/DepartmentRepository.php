@@ -36,6 +36,17 @@ class DepartmentRepository
         return $department;
     }
 
+    public function show($id)
+    {
+        $department = $this->model::find($id);
+
+        if(!$department){
+            throw new CustomException("Department Not Found.");
+        }
+
+        return $department;
+    }
+
     public function update($request, $id)
     {
         $department = $this->model::find($id);
