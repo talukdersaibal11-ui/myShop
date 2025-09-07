@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Enums\StatusEnum;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -22,7 +23,9 @@ return new class extends Migration
             $table->boolean('is_verified');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->string('file_path')->nullable();
+            $table->string('role')->default(StatusEnum::ADMIN);
+            $table->string('status')->default(StatusEnum::ACTIVE);
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
