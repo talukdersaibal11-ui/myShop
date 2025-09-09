@@ -9,12 +9,17 @@ enum StatusEnum : string
     const INACTIVE = "inactive";
 
     //Role
-    const ADMIN       = 'admin';
-    const SUPER_ADMIN = 'super-admin';
-    const EMPLOYEE    = 'employee';
+    const ADMIN       = "admin";
+    const SUPER_ADMIN = "super-admin";
+    const EMPLOYEE    = "employee";
 
     // Reward
-    const ONTIME = "ontime";
+    const ONTIME          = "ontime";
     const FULL_ATTENDANCE = "full_attendance";
-    const EXTRA = "extra";
+    const EXTRA           = "extra";
+
+    // Leave Type
+    const CASUAL = "casual";
+    const SICK   = "sick";
+    const ANNUAL = "annual";
 }
