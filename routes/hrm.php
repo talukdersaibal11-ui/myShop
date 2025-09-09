@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\HRM\AttendanceController;
 use App\Http\Controllers\Admin\HRM\DepartmentController;
 use App\Http\Controllers\Admin\HRM\DesignationController;
 use App\Http\Controllers\Admin\HRM\EmployeeController;
@@ -30,6 +31,16 @@ Route::middleware(['auth:sanctum'])->group(function(){
 
     Route::prefix('employee')->group(function(){
         Route::controller(EmployeeController::class)->group(function(){
+            Route::get('/', 'index');
+            Route::post('/', 'store');
+            Route::get('/{id}', 'show');
+            Route::put('/{id}', 'update');
+            Route::delete('/{id}', 'destroy');
+        });
+    });
+
+    Route::prefix('attendance')->group(function(){
+        Route::controller(AttendanceController::class)->group(function(){
             Route::get('/', 'index');
             Route::post('/', 'store');
             Route::get('/{id}', 'show');
