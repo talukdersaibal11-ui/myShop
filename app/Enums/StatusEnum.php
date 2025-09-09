@@ -7,6 +7,9 @@ enum StatusEnum : string
     //Status
     const ACTIVE   = "active";
     const INACTIVE = "inactive";
+    const PENDING = 'pending';
+    const APPROVED = 'approved';
+    const REJECTED = 'rejected';
 
     //Role
     const ADMIN       = "admin";
@@ -22,4 +25,6 @@ enum StatusEnum : string
     const CASUAL = "casual";
     const SICK   = "sick";
     const ANNUAL = "annual";
+
+
 }
