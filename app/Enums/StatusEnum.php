@@ -10,6 +10,7 @@ enum StatusEnum : string
     const PENDING = 'pending';
     const APPROVED = 'approved';
     const REJECTED = 'rejected';
+    const PAID = 'paid';
 
     //Role
     const ADMIN       = "admin";

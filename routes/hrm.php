@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\HRM\EmployeeController;
 use App\Http\Controllers\Admin\HRM\EmployeeLeaveController;
 use App\Http\Controllers\Admin\HRM\LeaveTypeController;
 use App\Http\Controllers\Admin\HRM\RewardController;
+use App\Http\Controllers\Admin\HRM\SalaryController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum'])->group(function(){
@@ -85,6 +86,16 @@ Route::middleware(['auth:sanctum'])->group(function(){
 
     Route::prefix('advance')->group(function(){
         Route::controller(AdvanceController::class)->group(function(){
+            Route::get('/', 'index');
+            Route::post('/', 'store');
+            Route::get('/{id}', 'show');
+            Route::put('/{id}', 'update');
+            Route::delete('/{id}', 'destroy');
+        });
+    });
+
+    Route::prefix('salary')->group(function(){
+        Route::controller(SalaryController::class)->group(function(){
             Route::get('/', 'index');
             Route::post('/', 'store');
             Route::get('/{id}', 'show');
