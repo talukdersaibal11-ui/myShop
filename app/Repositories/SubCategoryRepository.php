@@ -16,8 +16,8 @@ class SubCategoryRepository
         $paginateSize = Helper::checkPaginateSize($request);
         $searchKey    = $request->input('search_key', null);
 
-        $subCategories = $this->model::
-        when($searchKey, fn($query) => $query->where("name", "like", "%$searchKey%")->orWhere("slug", "like", "%$searchKey%"))
+        $subCategories = $this->model::with('category:id,name')
+        ->when($searchKey, fn($query) => $query->where("name", "like", "%$searchKey%")->orWhere("slug", "like", "%$searchKey%"))
         ->orderBy('id', 'desc')
         ->paginate($paginateSize);
 

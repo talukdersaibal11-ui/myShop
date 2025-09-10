@@ -17,10 +17,9 @@ class CategoryRepository
         $paginateSize = Helper::checkPaginateSize($request);
         $searchKey    = $request->input('search_key', null);
 
-        $categories = Category::
-        when($searchKey, fn($query) => $query->where("name", "like", "%$searchKey%")->orWhere("slug", "like", "%$searchKey%"))
-        ->orderBy('id', 'desc')
-        ->paginate($paginateSize);
+        $categories = Category::when($searchKey, fn($query) => $query->where("name", "like", "%$searchKey%")->orWhere("slug", "like", "%$searchKey%"))
+            ->orderBy('id', 'desc')
+            ->paginate($paginateSize);
 
         return $categories;
     }
