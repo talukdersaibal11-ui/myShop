@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('godown_code', 250);
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('phone_number', 15)->unique();
+            $table->string('phone_number', 15)->nullable();
             $table->string('address', 500)->nullable();
             $table->string('verification_token', 10)->nullable();
-            $table->boolean('is_verified');
+            $table->boolean('is_verified')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('file_path')->nullable();

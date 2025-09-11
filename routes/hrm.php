@@ -36,11 +36,11 @@ Route::middleware(['auth:sanctum'])->group(function(){
 
     Route::prefix('employee')->group(function(){
         Route::controller(EmployeeController::class)->group(function(){
-            Route::get('/', 'index');
-            Route::post('/', 'store');
-            Route::get('/{id}', 'show');
-            Route::put('/{id}', 'update');
-            Route::delete('/{id}', 'destroy');
+            Route::get('/',         'index');
+            Route::post('/',        'store');
+            Route::get('/{id}',     'show');
+            Route::put('/{id}',     'update');
+            Route::delete('/{id}',  'destroy');
         });
     });
 

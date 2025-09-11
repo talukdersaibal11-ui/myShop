@@ -17,7 +17,7 @@ class StoreEmployeeRequest extends FormRequest
             'name'         => ['required', 'string', 'min:2'],
             'email'        => ['required', 'email', 'unique:users,email'],
             'phone_number' => ['min:11'],
-            'file'         => ['nullable', 'mimes:png,jpg,webp,jpeg', 'max:2024']
+            'file'         => ['nullable', 'mimes:png,jpg,webp,jpeg', 'max:1014']
         ];
     }
 }

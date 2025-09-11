@@ -18,7 +18,7 @@ class User extends Authenticatable implements LaratrustUser
 
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $uploadPath = 'users';
+    public $uploadPath = 'users';
 
     /**
      * The attributes that are mass assignable.

@@ -21,8 +21,7 @@ class EmployeeRepository
         $paginateSize = Helper::checkPaginateSize($request);
         $searchKey    = $request->input("search_key", null);
 
-        $employees = $this->model
-            ->with(["user:id,name", "employee:id,name"])
+        $employees = $this->model::with(["user:id,name,email,phone_number,address"])
             ->when(
                 $searchKey,
                 fn($query) =>
@@ -54,13 +53,14 @@ class EmployeeRepository
             $userObj->name         = $request->name;
             $userObj->email        = $request->email;
             $userObj->phone_number = $request->phone_number;
-            $userObj->password     = Hash::make($request->name);
-            $userObj->is_verified  = $request->is_verified;
+            $userObj->address      = $request->address;
+            $userObj->password     = Hash::make('123456789');
+            $userObj->is_verified  = true;
             $userObj->role         = StatusEnum::EMPLOYEE;
             $userObj->status       = StatusEnum::ACTIVE;
 
             if($request->hasFile('file')){
-                $userObj->file_path = Helper::uploadFile($request->file, $userObj->uploadPath);
+                // $userObj->file_path = Helper::uploadFile($request->file, $userObj->uploadPath);
             }
 
             $res = $userObj->save();
@@ -70,7 +70,6 @@ class EmployeeRepository
 
                 $employee->user_id      = $userObj->id;
                 $employee->nid          = $request->nid;
-                $employee->address      = $request->address;
                 $employee->department   = $request->department;
                 $employee->designation  = $request->designation;
                 $employee->basic_salary = $request->basic_salary;
@@ -81,7 +80,9 @@ class EmployeeRepository
 
             DB::commit();
 
-            return $userObj;
+            $employee->load('user');
+
+            return $employee;
         } catch (Exception $exception) {
             DB::rollback();
             Log::info($exception->getMessage());
@@ -90,7 +91,7 @@ class EmployeeRepository
 
     public function show($id)
     {
-        $employee = $this->model::with("user:id,name")->find($id);
+        $employee = $this->model::with("user:id,name,email,phone_number,address")->find($id);
 
         if(!$employee){
             throw new CustomException("Employee not found.");
