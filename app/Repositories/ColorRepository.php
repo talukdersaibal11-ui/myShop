@@ -12,7 +12,7 @@ class ColorRepository
 
     public function index($request)
     {
-        $colors = $this->model::all();
+        $colors = $this->model::orderBy('id','desc')->get();
 
         return $colors;
     }
@@ -32,6 +32,8 @@ class ColorRepository
         $color->hex_code = $request->hex_code;
 
         $color->save();
+
+        return $color;
     }
 
     public function update($request, $id)
@@ -46,6 +48,8 @@ class ColorRepository
         $color->hex_code = $request->hex_code;
 
         $color->save();
+
+        return $color;
     }
 
     public function delete($id)

@@ -11,7 +11,7 @@ class UnitRepository
 
     public function index($request)
     {
-        $units = $this->model::all();
+        $units = $this->model::orderBy('id', 'desc')->get();
 
         return $units;
     }
@@ -31,6 +31,8 @@ class UnitRepository
         $unit->symbol = strtoupper($request->symbol);
 
         $unit->save();
+
+        return $unit;
     }
 
     public function update($request, $id)
@@ -41,10 +43,12 @@ class UnitRepository
             throw new CustomException("Unit not found");
         }
 
-        $unit->name     = $request->name;
-        $unit->hex_code = $request->hex_code;
+        $unit->name   = $request->name;
+        $unit->symbol = $request->symbol;
 
         $unit->save();
+
+        return $unit;
     }
 
     public function delete($id)
