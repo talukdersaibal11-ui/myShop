@@ -13,6 +13,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             CustomerTypeSeeder::class,
             DepartmentSeeder::class,
+            DesignationSeeder::class,
+            LeaveTypeSeeder::class,
             ColorSeeder::class,
             SizeSeeder::class,
             CategorySeeder::class,

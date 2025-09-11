@@ -24,21 +24,25 @@ class LeaveTypeController extends BaseController
 
     public function index(Request $request)
     {
-        $departments = $this->repository->index($request);
+        try {
+            $leaveTypes = $this->repository->index($request);
 
-        $departments = new LeaveTypeCollection($departments);
+            $leaveTypes = new LeaveTypeCollection($leaveTypes);
 
-        return $this->sendResponse($departments, 'Department List');
+            return $this->sendResponse($leaveTypes, 'Leave Type List');
+        } catch (Exception $exception) {
+            Log::info($exception->getMessage());
+        }
     }
 
     public function store(StoreLeaveTypeRequest $request)
     {
         try {
-            $department = $this->repository->store($request);
+            $leaveType = $this->repository->store($request);
 
-            $department = new LeaveTypeResource($department);
+            $leaveType = new LeaveTypeResource($leaveType);
 
-            return $this->sendResponse($department, 'Department Created Successfully');
+            return $this->sendResponse($leaveType, 'Leave Type Created Successfully');
         } catch (Exception $exception) {
             Log::info($exception->getMessage());
         }
@@ -62,11 +66,11 @@ class LeaveTypeController extends BaseController
     public function update(UpdateLeaveTypeRequest $request, $id)
     {
         try {
-            $department = $this->repository->update($request, $id);
+            $leaveType = $this->repository->update($request, $id);
 
-            $department = new LeaveTypeResource($department);
+            $leaveType = new LeaveTypeResource($leaveType);
 
-            return $this->sendResponse($department, 'Department Update Successfully');
+            return $this->sendResponse($leaveType, 'Leave Type Update Successfully');
         } catch (CustomException $exception) {
             return $this->sendError($exception->getMessage());
         } catch (Exception $exception) {
@@ -79,9 +83,9 @@ class LeaveTypeController extends BaseController
         try {
             $this->repository->delete($id);
 
-            return $this->sendResponse(null, "Department delete successfully.");
+            return $this->sendResponse(null, "Leave Type delete successfully.");
         } catch (CustomException $exception) {
-            return $this->sendError('Department is not found.');
+            return $this->sendError('Leave Type is not found.');
         } catch (Exception $exception) {
             Log::info($exception->getMessage());
         }

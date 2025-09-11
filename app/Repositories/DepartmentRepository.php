@@ -12,7 +12,7 @@ class DepartmentRepository
 
     public function index($request)
     {
-        $departments = $this->model::all();
+        $departments = $this->model::orderBy('id', 'desc')->get();
 
         return $departments;
     }

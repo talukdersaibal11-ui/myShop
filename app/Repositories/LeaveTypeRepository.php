@@ -11,16 +11,17 @@ class LeaveTypeRepository
 
     public function index($request)
     {
-        $attendances = $this->model::all();
+        $leaveTypes = $this->model::orderBy('id', 'desc')->get();
 
-        return $attendances;
+        return $leaveTypes;
     }
 
     public function store($request)
     {
         $attendance = new $this->model();
 
-        $attendance->name = $request->name;
+        $attendance->name              = $request->name;
+        $attendance->max_days_per_year = $request->max_days_per_year;
 
         $attendance->save();
 
@@ -34,27 +35,28 @@ class LeaveTypeRepository
 
     public function update($request, $id)
     {
-        $brand = $this->model::find($id);
+        $leaveType = $this->model::find($id);
 
-        if (!$brand) {
-            throw new CustomException("Attendance not found");
+        if (!$leaveType) {
+            throw new CustomException("Leave Type not found");
         }
 
-        $brand->name = $request->name;
+        $leaveType->name              = $request->name;
+        $leaveType->max_days_per_year = $request->max_days_per_year;
 
-        $brand->save();
+        $leaveType->save();
 
-        return $brand;
+        return $leaveType;
     }
 
     public function delete($id)
     {
-        $brand = $this->model::find($id);
+        $leaveType = $this->model::find($id);
 
-        if (!$brand) {
-            throw new CustomException("Brand not found");
+        if (!$leaveType) {
+            throw new CustomException("Leave Type not found");
         }
 
-        return $brand->delete();
+        return $leaveType->delete();
     }
 }

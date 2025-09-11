@@ -12,7 +12,7 @@ class DesignationRepository
 
     public function index($request)
     {
-        $designations = $this->model::all();
+        $designations = $this->model::orderBy('id', 'desc')->get();
 
         return $designations;
     }

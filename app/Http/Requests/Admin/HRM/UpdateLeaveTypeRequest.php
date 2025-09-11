@@ -14,7 +14,8 @@ class UpdateLeaveTypeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name'              => ['required', 'string', 'min:2'],
+            'max_days_per_year' => ['required', 'numeric']
         ];
     }
 }
